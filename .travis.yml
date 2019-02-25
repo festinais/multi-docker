@@ -16,6 +16,6 @@ after_success:
   #Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push festina/multi-client
-  - docker push festina/multi-ngnix
+  - docker push festina/multi-nginx
   - docker push festina/multi-server
   - docker push festina/multi-worker
