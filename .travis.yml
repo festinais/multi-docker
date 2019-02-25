@@ -3,19 +3,19 @@ services:
   - docker
 
 before_install:
-  - docker build -t festina/react-test -f ./client/Dockerfile.dev ./client
-
+  - docker build -t dockerfestina/react-test -f ./client/Dockerfile.dev ./client
+/home/festina/dev/complex/client/Dockerfile.dev
 script:  
-  - docker run festina/react-test npm test --  --coverage
+  - docker run dockerfestina/react-test npm test --  --coverage
 
 after_success:
-  - docker build -t festina/multi-client ./client
-  - docker build -t festina/multi-nginx ./nginx
-  - docker build -t festina/multi-server ./server
-  - docker build -t festina/multi-worker ./worker
+  - docker build -t dockerfestina/multi-client ./client
+  - docker build -t dockerfestina/multi-nginx ./nginx
+  - docker build -t dockerfestina/multi-server ./server
+  - docker build -t dockerfestina/multi-worker ./worker
   #Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push festina/multi-client
-  - docker push festina/multi-nginx
-  - docker push festina/multi-server
-  - docker push festina/multi-worker
+  - docker push dockerfestina/multi-client
+  - docker push dockerfestina/multi-nginx
+  - docker push dockerfestina/multi-server
+  - docker push dockerfestina/multi-worker
