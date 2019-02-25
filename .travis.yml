@@ -1,0 +1,21 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t festina/react-test -f ./client/Dockerfile.dev ./client
+
+script:  
+  - docker run festina/react-test npm test --  --coverage
+
+after_success:
+  - docker build -t festina/multi-client ./client
+  - docker build -t festina/multi-nginx ./nginx
+  - docker build -t festina/multi-server ./server
+  - docker build -t festina/multi-worker ./worker
+  #Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push festina/multi-client
+  - docker push festina/multi-ngnix
+  - docker push festina/multi-server
+  - docker push festina/multi-worker
