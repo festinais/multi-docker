@@ -4,7 +4,7 @@ services:
 
 before_install:
   - docker build -t dockerfestina/react-test -f ./client/Dockerfile.dev ./client
-/home/festina/dev/complex/client/Dockerfile.dev
+  
 script:  
   - docker run dockerfestina/react-test npm test --  --coverage
 
